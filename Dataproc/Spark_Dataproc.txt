@@ -1,22 +1,5 @@
 Create GCP project. Customize site you want.
 Create a new merchine first.
-If want to share the key:
-ssh-keygen -t rsa -f ~/.ssh/web8341-gcp-ssh-key -C web8341
-It will generate two files:
-web8341-gcp-ssh-key and web8341-gcp-ssh-key.pub
-from server setting download web8341-gcp-ssh-key file and save it as web8341-gcp-ssh-key - all file type in your compute.
-Using PuttyGen to generate a private key.
-
-cat .ssh/tanya-gcp-ssh-key.pub to print the key in screen.
-Copy the key and paste it into VM ssh key block.
-Then download the private key file in merchine setting button.
-Convert Putty private key using PuttyGen and save as private key.
-
-Putty host name:
-user_name@gcp_externalIP port 22
-Then expend SSH - AUTH open private key file, then open and yes.
-
-Winscp
 
 From Dataproc create a cluster.
 Initiate Jupyter:
@@ -59,3 +42,22 @@ Quick start cluster
 gcloud beta dataproc clusters export my-existing-cluster --destination cluster.yaml
 gcloud beta dataproc clusters import my-new-cluster --source cluster.yaml
 gcloud beta dataproc clusters import spark-6 --source "d:\tarma\cluster-spark-6.yaml"
+
+# This part is only used for the first time, if you want to control cluster from local machine.
+If want to share the key:
+ssh-keygen -t rsa -f ~/.ssh/web8341-gcp-ssh-key -C web8341
+It will generate two files:
+web8341-gcp-ssh-key and web8341-gcp-ssh-key.pub
+from server setting download web8341-gcp-ssh-key file and save it as web8341-gcp-ssh-key - all file type in your compute.
+Using PuttyGen to generate a private key.
+
+cat .ssh/tanya-gcp-ssh-key.pub to print the key in screen.
+Copy the key and paste it into VM ssh key block.
+Then download the private key file in merchine setting button.
+Convert Putty private key using PuttyGen and save as private key.
+
+Putty host name:
+user_name@gcp_externalIP port 22
+Then expend SSH - AUTH open private key file, then open and yes.
+
+Winscp
