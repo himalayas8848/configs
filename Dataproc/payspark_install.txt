@@ -1,0 +1,57 @@
+
+https://opensource.com/article/18/11/pyspark-jupyter-notebook
+
+Installation and setup
+Python 3.4+ is required for the latest version of PySpark, so make sure you have it installed before continuing. (Earlier Python versions will not work.)
+
+python3 --version
+Install the pip3 tool.
+
+sudo apt install python3-pip
+Install Jupyter for Python 3.
+
+pip3 install jupyter
+Augment the PATH variable to launch Jupyter Notebook easily from anywhere.
+
+export PATH=$PATH:~/.local/bin
+Choose a Java version. This is important; there are more variants of Java than there are cereal brands in a modern American store. Java 8 works with UBUNTU 18.04 LTS/SPARK-2.3.1-BIN-HADOOP2.7, so we will go with that version.
+
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get install oracle-java8-installer
+sudo apt-get install oracle-java8-set-default
+Check the installation.
+
+java -version
+Set some Java-related PATH variables.
+
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
+Install Scala.
+
+sudo apt-get install scala
+Check the Scala installation.
+
+scala -version
+Install py4j for the Python-Java integration.
+
+pip3 install py4j
+Install Apache Spark; go to the Spark download page and choose the latest (default) version. I am using Spark 2.3.1 with Hadoop 2.7. After downloading, unpack it in the location you want to use it.
+
+sudo tar -zxvf spark-2.3.1-bin-hadoop2.7.tgz
+Now, add a long set of commands to your .bashrc shell script. These will set environment variables to launch PySpark with Python 3 and enable it to be called from Jupyter Notebook. Take a backup of .bashrc before proceeding.
+
+Open .bashrc using any editor you like, such as gedit .bashrc. Add the following lines at the end:
+
+export SPARK_HOME='/{YOUR_SPARK_DIRECTORY}/spark-2.3.1-bin-hadoop2.7'
+export PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH
+export PYSPARK_DRIVER_PYTHON="jupyter"
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+export PYSPARK_PYTHON=python3
+export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin
+Remember to replace {YOUR_SPARK_DIRECTORY} with the directory where you unpacked Spark above.
+
+You can check your Spark setup by going to the /bin directory inside {YOUR_SPARK_DIRECTORY} and running the spark-shell –version command. Here you can see which version of Spark you have and which versions of Java and Scala it is using.
+
+That's it! Now you should be able to spin up a Jupyter Notebook and start using PySpark from anywhere.
+
+For example, if I created a directory ~/Spark/PySpark_work and work from there, I can launch Jupyter.

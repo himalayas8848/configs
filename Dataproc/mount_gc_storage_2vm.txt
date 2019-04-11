@@ -1,0 +1,26 @@
+ssh to cluster instance
+gcloud init
+choose account to enter
+project id
+no config engine
+
+export GCSFUSE_REPO=gcsfuse- 'lsb_release -c -s'
+echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | sudo tee /etc/apt/sources.list.d/gcsfuse.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+sudo apt-get update
+sudo apt-get install gcsfuse
+
+Creeate a bucket gsutil mb -c STANDARD -l us gs://<new bucket name>
+
+Create directory we want to mount in this service
+sudo mkdir /mnt/gcs-bucket
+Give all users write access to the directory
+sudo chmod a+w /mnt/gcs-bucket
+
+Mount the bucket to your instance
+gcsfuse [Bucket name] /mnt/gcs-bucket
+
+Verify 
+echo 'Hello, world!' > /mnt/gcs-bucket/hello.txt
+gsutil ls -r gs://[bucket name]

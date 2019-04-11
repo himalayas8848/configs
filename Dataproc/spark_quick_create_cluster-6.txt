@@ -1,0 +1,16 @@
+# Use this code in Goolge Cloud SDK Shell
+gcloud dataproc clusters create spark-6 ^
+--num-masters 1 ^
+--master-machine-type n1-standard-2 ^
+--master-boot-disk-size 32G ^
+--num-workers 5 ^
+--worker-machine-type n1-standard-1 ^
+--worker-boot-disk-size 32G ^
+--region us-east4 ^
+--zone  us-east4-c ^
+--initialization-actions gs://dataproc-initialization-actions/jupyter/jupyter.sh
+
+#--bucket gs://jhub-storage/google-cloud-dataproc-metainfo/ ^
+
+
+

@@ -1,0 +1,34 @@
+https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection/discussion/56014
+
+Solution 1:
+!gsutil -m cp gs://name-of-cloud-storage/file-name.csv ../path-to-store-file
+
+Solution 2:
+I'm also using gcloud, following code works for me.
+
+from google.cloud import storage
+
+from io import BytesIO
+
+client = storage.Client()
+
+bucket = "your bucket name"
+
+For read
+
+blob = storage.blob.Blob("train.csv",bucket)
+
+content = blob.download_as_string()
+
+train = pd.read_csv(BytesIO(content))
+
+For write
+
+train.to_pickle("train.pkl")
+
+blob = bucket.blob('train.pkl')
+
+blob.upload_from_filename('train.pkl')
+
+or 
+train.to_csv() if you like

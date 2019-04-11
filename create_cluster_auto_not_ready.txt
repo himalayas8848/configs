@@ -1,0 +1,25 @@
+https://cloud.google.com/dataproc/docs/tutorials/python-library-example
+When creating Dataproc creating VM step is not needed. 
+gcloud compute --project "project-jupyter-hub" ssh --zone "us-east4-a" "vm-hadoop"
+
+gcloud dataproc clusters create cluster-name="cluster-spark-5" ^
+    --project project-id="project-jupyter-hub" ^
+    --bucket bucket-name="gs://jhub-storage/" ^
+    --initialization-actions= ^
+        gs://dataproc-initialization-actions/jupyter/jupyter.sh
+gcloud dataproc clusters create basil \
+    --zone us-central1-a \
+    --master-machine-type n1-standard-1 \
+    --master-boot-disk-size 10 \
+    --num-workers 2 \
+    --worker-machine-type n1-standard-1 \
+    --worker-boot-disk-size 10 \
+    --project project_id
+
+gcloud dataproc clusters create --cluster-name cluster-spark-5 --project project-id project-jupyter-hub --zone us-east1-c --master-machine-type n1-standard-4 --num-workers 2 --bucket bucket-name gs://jhub-storage/ --initialization-actions gs://dataproc-initialization-actions/jupyter/jupyter.sh
+
+Create a cluster with a YAML fileBeta
+Run the following gcloud command to export the configuration of an existing Cloud Dataproc cluster into a YAML file.
+gcloud beta dataproc clusters export my-existing-cluster --destination cluster.yaml
+Create a new cluster by importing the YAML file configuration.
+gcloud beta dataproc clusters import my-new-cluster --source cluster.yaml

@@ -1,0 +1,69 @@
+Reference: from google lab
+https://codelabs.developers.google.com/codelabs/cloud-hello-kubernetes/index.html?index=..%2F..%2Findex#1
+Create a project and give a project name - write down PROJECT_ID
+Active  Google Cloud Shell
+You can view the account - gcloud auth list
+gcloud config list project
+If the project not set up,using this code: gcloud config set project <PROJECT_ID>
+And Check out what ID you used in the setup steps or look it up in the console dashboard.
+Finally set up zone: gcloud config set compute/zone us-central1-f  
+
+Reference:
+http://omerio.com/2016/01/02/getting-started-with-kubernetes-on-google-container-engine/
+
+gcloud projects create [project_name]
+gcloud config set project [project_name]
+
+Enable project
+
+gcloud compute zones list
+
+gcloud config set compute/zone us-east1-d
+
+Go to Cloud Platform. Create a VM.
+
+gcloud container clusters create jhub-cluster  # This is the app name.
+
+gcloud container clusters describe jhub-cluster
+#You will notice toward the end of the output there is a username and password.
+
+kubectl cluster-info
+
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+
+#Initialize
+kubectl --namespace kube-system create sa tiller
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller
+
+#Verify
+helm version
+helm repo update
+
+helm install stable/dask -f Custom-Dask/values.yaml
+
+###############################################
+If additional libraries are needed to be conda or pip installed, using the github clone config file. 
+Modify https://github.com/himalayas8848/Custom-Dask/tree/master cust-dask-config.yaml to proper package and nodes. Then git clone.
+
+Then helm list to find out the release name.
+
+Run 
+helm upgrade eerie-ferret stable/dask -f Custom-Dask/cust-dask-config.yaml 
+
+to upgrade cluster.
+
+Varify update
+kubectl logs turbulent-oyster-worker-1931881914-856mm
+###############################################
+#Verify deployment
+kubectl get pods
+kubectl get services
+
+kubectl get pods
+kubectl logs <PODNAME>
+
+# Reference:
+# https://github.com/helm/charts/tree/master/stable/dask-distributed  # Distributed Dask's config file
+# https://github.com/pupster90/io_Hub_Setup/blob/master/config.yaml 
+# Combining with these two config, there might have a way for user role control

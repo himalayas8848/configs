@@ -1,0 +1,14 @@
+kubectl config get-contexts
+kubectl get deployments
+kubectl get nodes
+kubectl get pod
+kubectl get svc
+kubectl get hpa # check if TARGETS percentage overloaded, minpods, maxpods and REPLICAS
+kubectl top pod  # check how much memory used in each pod
+
+# GET hpa check if pods memory sum up comparing with node memory to see if autoscale node is needed.
+
+# find if autoscale scheduler needed by kubectl get deployment
+
+# Best explaination
+# https://medium.com/magalix/kubernetes-autoscaling-101-cluster-autoscaler-horizontal-pod-autoscaler-and-vertical-pod-2a441d9ad231
